@@ -1,0 +1,20 @@
+{
+  "name": "Acando CodeCamp XSockets",
+  "version": "0.0.0",
+  "homepage": "https://github.com/acandocodecamp/xsockets",
+  "authors": [
+    "Jesper <jesper.astrom@connecta.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.4",
+    "bootstrap": "~3.3.5"
+  }
+}

@@ -9,8 +9,7 @@ namespace Acando.CodeCamp.Realtime
     {
         public override void OnMessage(IMessage message)
         {
-            Console.WriteLine(message.ToString());
-            this.InvokeToAll(message);
+            this.InvokeToAll("hej", "newReport");
         }
     }
 }

@@ -6,21 +6,22 @@
 
     // ReSharper disable once InconsistentNaming
     function TimeReportService() {
-        var newReportObserver = null;
-        var connection = new XSockets.WebSocket('ws://localhost:4502', ['reportscontroller']);
+        var newReportObserver = Rx.Observable.create(createObserver);
+        var connection = new XSockets.WebSocket('ws://localhost:4502', ['reports']);
+        var socketController = connection.controller('reports');
 
-        console.log(connection);
-        var socketController = connection.controller('reportscontroller');
+        socketController.onopen = socketConnectionOpen;
 
+        function createObserver(observer) {
+            socketController.on('newReport', function onNewReport(data) {
+                observer.onNext(data);
+            });
+        }
 
-        socketController.onopen = function socketConnectionOpen() {
+        function socketConnectionOpen() {
             console.log('reports connection opened');
 
-            newReportObserver = Rx.Observable.create(function createObserver(observer) {
-                socketController.on('newReport', function onNewReport(data) {
-                });
-            });
-        };
+        }
 
         return {
             newReportObserver: newReportObserver

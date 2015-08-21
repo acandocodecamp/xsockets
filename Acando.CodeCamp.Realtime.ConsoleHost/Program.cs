@@ -2,7 +2,7 @@
 using XSockets.Core.Common.Socket;
 using XSockets.Plugin.Framework;
 
-namespace Acando.CodeCamp.XSockets
+namespace Acando.CodeCamp.Realtime
 {
     class Program
     {

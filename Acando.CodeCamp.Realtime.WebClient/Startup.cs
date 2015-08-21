@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNet.Builder;
 using Microsoft.Framework.Logging;
 
-namespace Acando.CodeCamp.XSockets
+namespace Acando.CodeCamp.Realtime
 {
     public class Startup
     {

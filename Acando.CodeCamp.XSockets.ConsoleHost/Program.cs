@@ -1,7 +1,5 @@
 ﻿using System;
 using XSockets.Core.Common.Socket;
-using XSockets.Core.Common.Utility.Logging;
-using XSockets.Core.XSocket;
 using XSockets.Plugin.Framework;
 
 namespace Acando.CodeCamp.XSockets

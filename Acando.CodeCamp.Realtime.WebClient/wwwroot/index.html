@@ -2,12 +2,19 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Acando CodeCamp</title>
+    <title>Time App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="external/css/bootstrap.min.css" rel="stylesheet" />
     <link href="site.css" rel="stylesheet" />
 </head>
-<body ng-app="app" class="ng-cloak container">
+<body ng-app="app" class="ng-cloak">
+<header class="navbar navbar-static-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="/" class="navbar-brand">Time app</a>
+        </div>
+    </div>
+</header>
     <div ng-view></div>
     <script src="external/rx.min.js"></script>
     <script src="external/jquery.min.js"></script>

@@ -8,8 +8,11 @@
     function TimeReportService() {
         var newReportObserver = Rx.Observable.create(createObserver);
         var connection = new XSockets.WebSocket('ws://localhost:4502', ['reports']);
-        var socketController = connection.controller('reports');
+        var socketController = null;
 
+        connection.setAutoReconnect();
+
+        socketController = connection.controller('reports');
         socketController.onopen = socketConnectionOpen;
 
         function createObserver(observer) {
@@ -20,7 +23,6 @@
 
         function socketConnectionOpen() {
             console.log('reports connection opened');
-
         }
 
         return {

@@ -3,7 +3,10 @@ namespace Acando.CodeCamp.Realtime
     public class ReportModel
     {
         public int Year { get; set; }
+
         public int Week { get; set; }
+
+        public bool Approved { get; set; }
 
         public Project[] Projects { get; set; }
 

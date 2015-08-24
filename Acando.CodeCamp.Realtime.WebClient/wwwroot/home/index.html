@@ -6,7 +6,7 @@
             <button class="btn" ng-click="vm.add()">Add</button>
         </div>
     </div>
-    <form ng-repeat="report in vm.reports | orderBy: ['isNew', 'Year', 'Week']">
+    <form ng-repeat="report in vm.reports | orderBy: ['isNew', 'Year', 'Week']" ng-class="{'bg-success': report.Approved, 'bg-info': !report.Approved}">
         <div class="row row-island" ng-repeat="project in report.Projects">
             <!--Year-Week-->
             <div class="col-xs-2" ng-if="$first && !report.isNew">

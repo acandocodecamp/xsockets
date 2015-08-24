@@ -2,7 +2,6 @@ using System.Threading.Tasks;
 using XSockets.Core.Common.Socket.Event.Interface;
 using XSockets.Core.XSocket;
 using XSockets.Core.XSocket.Helpers;
-using XSockets.Core.XSocket.Model;
 using XSockets.Plugin.Framework;
 
 namespace Acando.CodeCamp.Realtime
@@ -14,6 +13,14 @@ namespace Acando.CodeCamp.Realtime
         public ReportsController()
         {
             _reportStorage = Composable.GetExport<ReportStorage>();
+        }
+
+        public async Task SaveReport(ReportModel report)
+        {
+            report.Approved = true;
+            _reportStorage.Upsert(report);
+            await Task.Delay(5000);
+            await this.Invoke(report, "approvedReport");
         }
 
         public override Task OnOpened()

@@ -7,6 +7,8 @@
     // ReSharper disable once InconsistentNaming
     function TimeReportService($q) {
         var deferredInitalReports = $q.defer();
+        var approvedReportObserver = Rx.Observable.create(createApprovedReportObserver);
+
         var connection = new XSockets.WebSocket('ws://localhost:4502', ['reports']);
         connection.setAutoReconnect();
 
@@ -21,10 +23,20 @@
             console.log('Reports connection opened');
         }
 
+        function createApprovedReportObserver(observer) {
+            socketController.on('approvedReport', function onApprovedReport(data) {
+                observer.onNext(data);
+            });
+        }
+
         return {
             getReports: function getReports() {
                 return deferredInitalReports.promise;
-            }
+            },
+            save: function (report) {
+                socketController.invoke('saveReport', report);
+            },
+            approvedReportObserver: approvedReportObserver
         };
     }
 
@@ -34,10 +46,8 @@
         .module('app')
         .service('timeReportService', TimeReportService);
 
-    //var newReportObserver = Rx.Observable.create(createObserver);
-    //        function createObserver(observer) {
-    //observer.onNext(data);
-    //      }
+    //
+    //        
     //newReportObserver: newReportObserver
 
 }(angular, XSockets, Rx));

@@ -5,15 +5,34 @@
     function HomeController($scope, timeReportService) {
         var vm = this;
         var reportClone = null;
-        var projects = [{
-            name: 'H&M dev'
-        }, {
-            name: 'Internal'
-        }];
         vm.edit = edit;
         vm.save = save;
         vm.cancel = cancel;
         vm.add = add;
+
+        timeReportService.getReports()
+            .then(function reportsLoaded(data) {
+                vm.reports = data;
+            })
+            .catch(function reportsFailed(reason) {
+                console.log(reason);
+            });
+
+        timeReportService.approvedReportObserver.subscribe(subscribe, subscriptionError);
+
+        function subscribe(approvedReport) {
+            var matchedReport = vm.reports.find(function findReport(report) {
+                return report.Year === approvedReport.Year && report.Week === approvedReport.Week;
+            });
+            if (matchedReport) {
+                matchedReport.Approved = approvedReport.Approved;
+                $scope.$apply();
+            }
+        }
+        
+        function subscriptionError(err) {
+            console.log(err);
+        }
 
         function add() {
             vm.reports.unshift({
@@ -21,7 +40,11 @@
                 week: getCurrentWeek(),
                 isEditing: true,
                 isNew: true,
-                projects: angular.copy(projects)
+                projects: [{
+                    name: 'H&M dev'
+                }, {
+                    name: 'Internal'
+                }]
             });
         }
 
@@ -32,6 +55,8 @@
 
         function save(report) {
             report.isEditing = false;
+            report.Approved = false;
+            timeReportService.save(report);
         }
 
         function cancel(report) {
@@ -53,24 +78,6 @@
             var firstJan = new Date(now.getFullYear(), 0, 1);
             return Math.ceil((((now - firstJan) / 86400000) + firstJan.getDay() + 1) / 7);
         }
-
-        timeReportService.getReports()
-            .then(function reportsLoaded(data) {
-                console.log(data);
-                vm.reports = data;
-            })
-            .catch(function reportsFailed(reason) {
-                console.log(reason);
-            });
-
-        //timeReportService.newReportObserver.subscribe(function (report) {
-        //    console.log('Received:');
-        //    console.log(report);
-        //}, function onError(err) {
-        //    console.log(err);
-        //}, function onDone() {
-        //    console.log('Done!');
-        //});
     }
 
     HomeController.$inject = ['$scope', 'timeReportService'];

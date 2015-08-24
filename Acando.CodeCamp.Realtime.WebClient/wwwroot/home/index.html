@@ -6,80 +6,80 @@
             <button class="btn" ng-click="vm.add()">Add</button>
         </div>
     </div>
-    <form ng-repeat="report in vm.reports | orderBy: ['isNew', 'year', 'week']">
-        <div class="row row-island" ng-repeat="project in report.projects">
-            <!--Year-week-->
+    <form ng-repeat="report in vm.reports | orderBy: ['isNew', 'Year', 'Week']">
+        <div class="row row-island" ng-repeat="project in report.Projects">
+            <!--Year-Week-->
             <div class="col-xs-2" ng-if="$first && !report.isNew">
-                <label class="form-control-static">{{::report.year}}-{{::report.week}}</label>
+                <label class="form-control-static">{{::report.Year}}-{{::report.Week}}</label>
             </div>
             <div ng-if="$first && report.isNew">
                 <div class="col-xs-1">
-                    <input type="number" class="form-control" ng-model="report.year"/>
+                    <input type="number" class="form-control" ng-model="report.Year"/>
                 </div>
                 <div class="col-xs-1">
-                    <input type="number" class="form-control" ng-model="report.week"/>
+                    <input type="number" class="form-control" ng-model="report.Week"/>
                 </div>
             </div>
             <div class="col-xs-2" ng-if="!$first"></div>
             <!--Project name-->
             <div class="col-xs-1">
-                <p class="form-control-static">{{project.name}}</p>
+                <p class="form-control-static">{{project.Name}}</p>
             </div>
             <!--Monday-->
             <div class="col-xs-1" ng-if="report.isEditing">
                 <label class="sr-only" for="monday">Monday</label>
-                <input type="number" class="form-control" id="monday" placeholder="Mo" ng-model="project.moday">
+                <input type="number" class="form-control" id="monday" placeholder="Mo" ng-model="project.Moday">
             </div>
             <div class="col-xs-1" ng-if="!report.isEditing">
-                <p class="form-control-static" ng-if="!report.isEditing">{{::project.monday}}</p>
+                <p class="form-control-static" ng-if="!report.isEditing">{{::project.Monday}}</p>
             </div>
             <!--Tuesday-->
             <div class="col-xs-1" ng-if="report.isEditing">
                 <label class="sr-only" for="tuesday">Tuesday</label>
-                <input type="number" class="form-control" id="tuesday" placeholder="Tu" ng-model="project.tuesday">
+                <input type="number" class="form-control" id="tuesday" placeholder="Tu" ng-model="project.Tuesday">
             </div>
             <div class="col-xs-1" ng-if="!report.isEditing">
-                <p class="form-control-static">{{::project.tuesday}}</p>
+                <p class="form-control-static">{{::project.Tuesday}}</p>
             </div>
             <!--Wednesday-->
             <div class="col-xs-1" ng-if="report.isEditing">
                 <label class="sr-only" for="wednesday">Wednesday</label>
-                <input type="number" class="form-control" id="wednesday" placeholder="We" ng-model="project.wednesday">
+                <input type="number" class="form-control" id="wednesday" placeholder="We" ng-model="project.Wednesday">
             </div>
             <div class="col-xs-1" ng-if="!report.isEditing">
-                <p class="form-control-static">{{::project.wednesday}}</p>
+                <p class="form-control-static">{{::project.Wednesday}}</p>
             </div>
             <!--Thursday-->
             <div class="col-xs-1" ng-if="report.isEditing">
                 <label class="sr-only" for="thursday">Thursday</label>
-                <input type="number" class="form-control" id="thursday" placeholder="Th" ng-model="project.thursday">
+                <input type="number" class="form-control" id="thursday" placeholder="Th" ng-model="project.Thursday">
             </div>
             <div class="col-xs-1" ng-if="!report.isEditing">
-                <p class="form-control-static">{{::project.thursday}}</p>
+                <p class="form-control-static">{{::project.Thursday}}</p>
             </div>
             <!--Friday-->
             <div class="col-xs-1" ng-if="report.isEditing">
                 <label class="sr-only" for="friday">Friday</label>
-                <input type="number" class="form-control" id="friday" placeholder="Fr" ng-model="project.friday">
+                <input type="number" class="form-control" id="friday" placeholder="Fr" ng-model="project.Friday">
             </div>
             <div class="col-xs-1" ng-if="!report.isEditing">
-                <p class="form-control-static">{{::project.friday}}</p>
+                <p class="form-control-static">{{::project.Friday}}</p>
             </div>
             <!--Saturday-->
             <div class="col-xs-1" ng-if="report.isEditing">
                 <label class="sr-only" for="saturday">Saturday</label>
-                <input type="number" class="form-control" id="saturday" placeholder="Sa" ng-model="project.saturday">
+                <input type="number" class="form-control" id="saturday" placeholder="Sa" ng-model="project.Saturday">
             </div>
             <div class="col-xs-1" ng-if="!report.isEditing">
-                <p class="form-control-static">{{::project.saturday}}</p>
+                <p class="form-control-static">{{::project.Saturday}}</p>
             </div>
             <!--Sunday-->
             <div class="col-xs-1" ng-if="report.isEditing">
                 <label class="sr-only" for="sunday">Sunday</label>
-                <input type="number" class="form-control" id="sunday" placeholder="Su" ng-model="project.sunday">
+                <input type="number" class="form-control" id="sunday" placeholder="Su" ng-model="project.Sunday">
             </div>
             <div class="col-xs-1" ng-if="!report.isEditing">
-                <p class="form-control-static">{{::project.sunday}}</p>
+                <p class="form-control-static">{{::project.Sunday}}</p>
             </div>
             <!--Buttons-->
             <div class="col-xs-2">

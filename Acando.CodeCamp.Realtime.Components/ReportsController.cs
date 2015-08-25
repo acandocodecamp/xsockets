@@ -42,13 +42,6 @@ namespace Acando.CodeCamp.Realtime
             return Task.FromResult(true);
         }
 
-        //public void NewReport(ReportModel report)
-        //{
-        //    this.Queue(DeliveryType.Rpc, new Message(null, report, "newReport", Alias));
-        //    this.InvokeTo(x => x.PersistentId == PersistentId, report, "newReport");
-        //    this.InvokeToAll("hej", "newReport");
-        //}
-
         public override void OnMessage(IMessage message)
         {
             //

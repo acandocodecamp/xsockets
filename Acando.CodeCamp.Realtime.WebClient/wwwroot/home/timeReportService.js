@@ -1,15 +1,19 @@
-﻿/// <reference path="../external/xsockets.latest.js" />
+﻿/// <reference path="../external/rx.js" />
+/// <reference path="../external/angular.js" />
+/// <reference path="../external/xsockets.latest.js" />
 
 // ReSharper disable once InconsistentNaming
 (function (angular, XSockets, Rx) {
     'use strict';
 
     // ReSharper disable once InconsistentNaming
-    function TimeReportService($q) {
+    function TimeReportService($q, $location) {
+        var port = getPort();
+        var endpoint = 'ws://127.0.0.1:' + port;
         var deferredInitalReports = $q.defer();
         var approvedReportObserver = Rx.Observable.create(createApprovedReportObserver);
 
-        var connection = new XSockets.WebSocket('ws://localhost:4502', ['reports']);
+        var connection = new XSockets.WebSocket(endpoint, ['reports']);
         connection.setAutoReconnect();
 
         var socketController = connection.controller('reports');
@@ -29,6 +33,10 @@
             });
         }
 
+        function getPort() {
+            return $location.search().port || '4502';
+        }
+
         return {
             getReports: function getReports() {
                 return deferredInitalReports.promise;
@@ -36,18 +44,15 @@
             save: function (report) {
                 socketController.invoke('saveReport', report);
             },
-            approvedReportObserver: approvedReportObserver
+            approvedReportObserver: approvedReportObserver,
+            endpoint: endpoint
         };
     }
 
-    TimeReportService.$inject = ['$q'];
+    TimeReportService.$inject = ['$q', '$location'];
 
     angular
         .module('app')
         .service('timeReportService', TimeReportService);
-
-    //
-    //        
-    //newReportObserver: newReportObserver
 
 }(angular, XSockets, Rx));

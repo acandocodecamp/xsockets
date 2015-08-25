@@ -9,10 +9,10 @@
         vm.save = save;
         vm.cancel = cancel;
         vm.add = add;
+        vm.endpoint = timeReportService.endpoint;
 
         timeReportService.getReports()
             .then(function reportsLoaded(data) {
-                console.log(data);
                 vm.reports = data;
             })
             .catch(function reportsFailed(reason) {

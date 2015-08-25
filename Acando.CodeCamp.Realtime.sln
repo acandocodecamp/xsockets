@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acando.CodeCamp.Realtime.Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acando.CodeCamp.Realtime.ConsoleHost", "Acando.CodeCamp.Realtime.ConsoleHost\Acando.CodeCamp.Realtime.ConsoleHost.csproj", "{84E366A8-D916-4CA5-8381-CF14B7AC0B4C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acando.CodeCamp.Realtime.OwinHost", "Acando.CodeCamp.Realtime.OwinHost\Acando.CodeCamp.Realtime.OwinHost.csproj", "{4D00F087-9893-45FE-A83D-9D43E03B651F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{84E366A8-D916-4CA5-8381-CF14B7AC0B4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84E366A8-D916-4CA5-8381-CF14B7AC0B4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84E366A8-D916-4CA5-8381-CF14B7AC0B4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D00F087-9893-45FE-A83D-9D43E03B651F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D00F087-9893-45FE-A83D-9D43E03B651F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D00F087-9893-45FE-A83D-9D43E03B651F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D00F087-9893-45FE-A83D-9D43E03B651F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

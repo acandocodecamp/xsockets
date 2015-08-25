@@ -1,5 +1,5 @@
 ﻿[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-  display: none !important;
+    display: none !important;
 }
 
 header {
@@ -7,16 +7,26 @@ header {
     background-color: cadetblue;
 }
 
-header .navbar-brand {
-    font-size: 2em;
-    font-weight: 500;
-    color: white;
-}
+    header .navbar-brand {
+        font-size: 2em;
+        font-weight: 500;
+        color: white;
+    }
 
-header .navbar-brand:hover {
-    text-decoration: none;
-}
+        header .navbar-brand:hover {
+            text-decoration: none;
+        }
 
 .row-island {
     margin-bottom: 15px;
+}
+
+.footer {
+    background-color: #ddd;
+    color: #999; 
+}
+
+.footer .notification-text {
+    padding: 10px 0;
+    margin: 0;
 }

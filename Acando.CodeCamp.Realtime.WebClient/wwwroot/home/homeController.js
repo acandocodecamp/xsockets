@@ -1,15 +1,17 @@
-﻿(function (angular) {
+﻿/// <reference path="../external/angular.js" />
+
+(function (angular) {
     'use strict';
 
-    // ReSharper disable once InconsistentNaming
-    function HomeController($scope, timeReportService) {
+    HomeController.$inject = ['$scope', 'connectionService', 'timeReportService'];
+    function HomeController($scope, connectionService, timeReportService) {
         var vm = this;
         var reportClone = null;
         vm.edit = edit;
         vm.save = save;
         vm.cancel = cancel;
         vm.add = add;
-        vm.endpoint = timeReportService.endpoint;
+        vm.endpoint = connectionService.endpoint;
 
         timeReportService.getReports()
             .then(function reportsLoaded(data) {
@@ -81,7 +83,6 @@
         }
     }
 
-    HomeController.$inject = ['$scope', 'timeReportService'];
     angular
         .module('app')
         .controller('HomeController', HomeController);

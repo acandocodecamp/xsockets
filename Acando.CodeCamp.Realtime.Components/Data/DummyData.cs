@@ -1,17 +1,14 @@
-using System.Collections.Generic;
-using System.Linq;
-using XSockets.Plugin.Framework.Attributes;
+﻿using System.Collections.Generic;
 
-namespace Acando.CodeCamp.Realtime
+namespace Acando.CodeCamp.Realtime.Data
 {
-    [Export(typeof(ReportStorage))]
-    public class ReportStorage
+    internal class DummyData
     {
-        #region Dummy data
-        private static readonly List<ReportModel> Reports = new List<ReportModel>
+        public static readonly List<ReportModel> Reports = new List<ReportModel>
         {
             new ReportModel
             {
+                Id = "201530",
                 Year = 2015,
                 Week = 30,
                 Approved = true,
@@ -43,6 +40,7 @@ namespace Acando.CodeCamp.Realtime
             },
             new ReportModel
             {
+                Id = "201531",
                 Year = 2015,
                 Week = 31,
                 Approved = true,
@@ -74,6 +72,7 @@ namespace Acando.CodeCamp.Realtime
             },
             new ReportModel
             {
+                Id = "201532",
                 Year = 2015,
                 Week = 32,
                 Approved = true,
@@ -104,24 +103,5 @@ namespace Acando.CodeCamp.Realtime
                 }
             }
         };
-        #endregion
-
-        public virtual ReportModel[] GetReports(string username)
-        {
-            return Reports.ToArray();
-        }
-
-        public virtual void Upsert(ReportModel report)
-        {
-            int index = Reports.FindIndex(r => r.Year == report.Year && r.Week == report.Week);
-            if (index < 0)
-            {
-                Reports.Add(report);
-            }
-            else
-            {
-                Reports[index] = report;
-            }
-        }
     }
 }

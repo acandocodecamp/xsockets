@@ -12,6 +12,7 @@
 
         timeReportService.getReports()
             .then(function reportsLoaded(data) {
+                console.log(data);
                 vm.reports = data;
             })
             .catch(function reportsFailed(reason) {
@@ -22,10 +23,10 @@
 
         function subscribe(approvedReport) {
             var matchedReport = vm.reports.find(function findReport(report) {
-                return report.Year === approvedReport.Year && report.Week === approvedReport.Week;
+                return report.year === approvedReport.year && report.week === approvedReport.week;
             });
             if (matchedReport) {
-                matchedReport.Approved = approvedReport.Approved;
+                matchedReport.approved = approvedReport.approved;
                 $scope.$apply();
             }
         }
@@ -55,7 +56,7 @@
 
         function save(report) {
             report.isEditing = false;
-            report.Approved = false;
+            report.approved = false;
             timeReportService.save(report);
         }
 

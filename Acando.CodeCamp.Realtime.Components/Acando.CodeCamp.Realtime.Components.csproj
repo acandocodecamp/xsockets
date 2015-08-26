@@ -84,7 +84,7 @@
     <Compile Include="Interceptors\RealtimeErrorInterceptor.cs" />
     <Compile Include="NotificationController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RealtimeMessageInterceptor.cs" />
+    <Compile Include="Interceptors\RealtimeMessageInterceptor.cs" />
     <Compile Include="ReportModel.cs" />
     <Compile Include="ReportsController.cs" />
     <Compile Include="Data\ReportStorage.cs" />

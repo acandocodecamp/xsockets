@@ -3,7 +3,7 @@ using XSockets.Core.Common.Interceptor;
 using XSockets.Core.Common.Protocol;
 using XSockets.Core.Common.Socket.Event.Interface;
 
-namespace Acando.CodeCamp.Realtime
+namespace Acando.CodeCamp.Realtime.Interceptors
 {
     public class RealtimeMessageInterceptor : IMessageInterceptor
     {

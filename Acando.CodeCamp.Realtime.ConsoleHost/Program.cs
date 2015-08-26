@@ -13,7 +13,7 @@ namespace Acando.CodeCamp.Realtime
             {
                 container.Start();
 
-                Composable.GetExport<IXSocketsScaleOut>().AddScaleOut("ws://127.0.0.1:4503");
+                //Composable.GetExport<IXSocketsScaleOut>().AddScaleOut("ws://127.0.0.1:4503");
 
                 foreach (var server in container.Servers)
                 {

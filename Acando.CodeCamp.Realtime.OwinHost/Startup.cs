@@ -23,7 +23,7 @@ namespace Acando.CodeCamp.Realtime
 
             app.UseXSockets(new OwinHostConfiguration());
 
-            Composable.GetExport<IXSocketsScaleOut>().AddScaleOut("ws://127.0.0.1:4502");
+            //Composable.GetExport<IXSocketsScaleOut>().AddScaleOut("ws://127.0.0.1:4502");
 
             var configurationSetting = Composable.GetExport<IConfigurationSetting>();
 

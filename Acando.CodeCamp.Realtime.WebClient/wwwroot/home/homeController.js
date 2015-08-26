@@ -24,15 +24,17 @@
         timeReportService.approvedReportObserver.subscribe(subscribe, subscriptionError);
 
         function subscribe(approvedReport) {
+            var index = -1;
             var matchedReport = vm.reports.find(function findReport(report) {
                 return report.year === approvedReport.year && report.week === approvedReport.week;
             });
             if (matchedReport) {
-                matchedReport.approved = approvedReport.approved;
+                index = vm.reports.indexOf(matchedReport);
+                vm.reports[index] = approvedReport;
                 $scope.$apply();
             }
         }
-        
+
         function subscriptionError(err) {
             console.log(err);
         }

@@ -11,7 +11,7 @@ namespace Acando.CodeCamp.Realtime
         static void Main(string[] args)
         {
             //Wait for server to start
-            Task.Delay(5000).Wait();
+            Task.Delay(10000).Wait();
 
             var connection = new XSocketClient("ws://localhost:4502", "http://localhost", "Notification");
             IController controller = connection.Controller("Notification");

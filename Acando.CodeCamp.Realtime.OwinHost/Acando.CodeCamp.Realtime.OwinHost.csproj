@@ -170,6 +170,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Acando.CodeCamp.Realtime.Components\Acando.CodeCamp.Realtime.Components.csproj">
+      <Project>{11fc0e3a-67dd-48b7-9a99-c77fb6fd363e}</Project>
+      <Name>Acando.CodeCamp.Realtime.Components</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

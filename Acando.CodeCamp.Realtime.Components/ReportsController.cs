@@ -3,6 +3,7 @@ using Acando.CodeCamp.Realtime.Data;
 using XSockets.Core.Common.Socket.Event.Interface;
 using XSockets.Core.XSocket;
 using XSockets.Core.XSocket.Helpers;
+using XSockets.Core.XSocket.Model;
 using XSockets.Plugin.Framework;
 
 namespace Acando.CodeCamp.Realtime
@@ -21,11 +22,12 @@ namespace Acando.CodeCamp.Realtime
             report.Approved = true;
             await _reportStorage.UpsertAsync(report);
             await Task.Delay(5000);
-            await this.Invoke(report, "approvedReport");
+            this.InvokeToAll(report, "approvedReport");
         }
 
         public override Task OnOpened()
         {
+            //Bad practice?
             ReportModel[] reports = _reportStorage.GetReports();
             return this.Invoke(reports, "initialReports");
         }

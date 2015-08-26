@@ -16,12 +16,12 @@
             console.log('Reports connection opened');
         };
 
-        socketController.on('initialReports', function onNewReport(data) {
+        socketController.initialreports = function onNewReport(data) {
             deferredInitalReports.resolve(data);
-        });
+        };
 
         function createApprovedReportObserver(observer) {
-            socketController.on('approvedReport', function onApprovedReport(data) {
+            socketController.subscribe('approvedReport', function onApprovedReport(data) {
                 observer.onNext(data);
             });
         }

@@ -3,6 +3,7 @@ using Acando.CodeCamp.Realtime;
 using Microsoft.Owin;
 using Owin;
 using XSockets.Core.Common.Configuration;
+using XSockets.Core.Common.Enterprise;
 using XSockets.Owin.Host;
 using XSockets.Plugin.Framework;
 
@@ -21,6 +22,8 @@ namespace Acando.CodeCamp.Realtime
             sb.AppendLine("");
 
             app.UseXSockets(new OwinHostConfiguration());
+
+            Composable.GetExport<IXSocketsScaleOut>().AddScaleOut("ws://127.0.0.1:4502");
 
             var configurationSetting = Composable.GetExport<IConfigurationSetting>();
 

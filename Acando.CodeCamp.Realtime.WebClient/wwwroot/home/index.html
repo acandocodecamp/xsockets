@@ -1,5 +1,5 @@
 ﻿<div class="container-fluid">
-    <div class="row row-island">
+    <div class="row island">
         <div class="col-xs-10">
             <p class="form-control-static">{{::vm.endpoint}}</p>
         </div>
@@ -7,86 +7,94 @@
             <button class="btn" ng-click="vm.add()">Add</button>
         </div>
     </div>
-    <form ng-repeat="report in vm.reports track by $index | orderBy: ['isNew', 'year', 'week']" ng-class="{'bg-success': report.approved, 'bg-info': !report.approved}">
-        <div class="row row-island" ng-repeat="project in report.projects track by $index">
+    <form class="island" ng-repeat="report in vm.reports track by $index | orderBy: ['isNew', 'year', 'week']" ng-class="{'bg-success': report.approved, 'bg-info': !report.approved}">
+        <div class="row">
             <!--Year-Week-->
-            <div class="col-xs-2" ng-if="$first && !report.isNew">
+            <div class="col-xs-6" ng-if="!report.isNew">
                 <label class="form-control-static">{{::report.year}}-{{::report.week}}</label>
             </div>
-            <div ng-if="$first && report.isNew">
-                <div class="col-xs-1">
-                    <input type="number" class="form-control" ng-model="report.year"/>
+            <div ng-if="report.isNew">
+                <div class="col-xs-4">
+                    <input type="number" class="form-control" ng-model="report.year" />
                 </div>
-                <div class="col-xs-1">
-                    <input type="number" class="form-control" ng-model="report.week"/>
+                <div class="col-xs-2">
+                    <input type="number" class="form-control" ng-model="report.week" />
                 </div>
-            </div>
-            <div class="col-xs-2" ng-if="!$first"></div>
-            <!--Project name-->
-            <div class="col-xs-1">
-                <p class="form-control-static">{{project.name}}</p>
-            </div>
-            <!--Monday-->
-            <div class="col-xs-1" ng-if="report.isEditing">
-                <label class="sr-only" for="monday">Monday</label>
-                <input type="number" class="form-control" id="monday" placeholder="Mo" ng-model="project.monday">
-            </div>
-            <div class="col-xs-1" ng-if="!report.isEditing">
-                <p class="form-control-static" ng-if="!report.isEditing">{{::project.monday}}</p>
-            </div>
-            <!--Tuesday-->
-            <div class="col-xs-1" ng-if="report.isEditing">
-                <label class="sr-only" for="tuesday">Tuesday</label>
-                <input type="number" class="form-control" id="tuesday" placeholder="Tu" ng-model="project.tuesday">
-            </div>
-            <div class="col-xs-1" ng-if="!report.isEditing">
-                <p class="form-control-static">{{::project.tuesday}}</p>
-            </div>
-            <!--Wednesday-->
-            <div class="col-xs-1" ng-if="report.isEditing">
-                <label class="sr-only" for="wednesday">Wednesday</label>
-                <input type="number" class="form-control" id="wednesday" placeholder="We" ng-model="project.wednesday">
-            </div>
-            <div class="col-xs-1" ng-if="!report.isEditing">
-                <p class="form-control-static">{{::project.wednesday}}</p>
-            </div>
-            <!--Thursday-->
-            <div class="col-xs-1" ng-if="report.isEditing">
-                <label class="sr-only" for="thursday">Thursday</label>
-                <input type="number" class="form-control" id="thursday" placeholder="Th" ng-model="project.thursday">
-            </div>
-            <div class="col-xs-1" ng-if="!report.isEditing">
-                <p class="form-control-static">{{::project.thursday}}</p>
-            </div>
-            <!--Friday-->
-            <div class="col-xs-1" ng-if="report.isEditing">
-                <label class="sr-only" for="friday">Friday</label>
-                <input type="number" class="form-control" id="friday" placeholder="Fr" ng-model="project.friday">
-            </div>
-            <div class="col-xs-1" ng-if="!report.isEditing">
-                <p class="form-control-static">{{::project.friday}}</p>
-            </div>
-            <!--Saturday-->
-            <div class="col-xs-1" ng-if="report.isEditing">
-                <label class="sr-only" for="saturday">Saturday</label>
-                <input type="number" class="form-control" id="saturday" placeholder="Sa" ng-model="project.saturday">
-            </div>
-            <div class="col-xs-1" ng-if="!report.isEditing">
-                <p class="form-control-static">{{::project.saturday}}</p>
-            </div>
-            <!--Sunday-->
-            <div class="col-xs-1" ng-if="report.isEditing">
-                <label class="sr-only" for="sunday">Sunday</label>
-                <input type="number" class="form-control" id="sunday" placeholder="Su" ng-model="project.sunday">
-            </div>
-            <div class="col-xs-1" ng-if="!report.isEditing">
-                <p class="form-control-static">{{::project.sunday}}</p>
             </div>
             <!--Buttons-->
-            <div class="col-xs-2">
-                <button type="submit" class="btn btn-default" ng-if="report.isEditing && $first" ng-click="vm.save(report)">Save</button>
-                <button type="button" class="btn btn-link" ng-if="report.isEditing && $first" ng-click="vm.cancel(report)">Cancel</button>
-                <button type="button" class="btn btn-link" ng-if="!report.isEditing && $first" ng-click="vm.edit(report)">Edit</button>
+            <div class="col-xs-6">
+                <button type="button" class="pull-right btn btn-link" ng-if="report.isEditing" ng-click="vm.cancel(report)">Cancel</button>
+                <button type="submit" class="pull-right btn btn-default btn-sm" ng-if="report.isEditing" ng-click="vm.save(report)">Save</button>
+                <button type="button" class="pull-right btn btn-link" ng-if="!report.isEditing" ng-click="vm.edit(report)">Edit</button>
+            </div>
+        </div>
+        <div ng-repeat="project in report.projects track by $index">
+            <!--Project name-->
+            <div class="row">
+                <div class="col-xs-2">
+                    <p class="form-control-static">{{project.name}}</p>
+                </div>
+                <!--Monday-->
+                <div class="col-xs-2" ng-if="report.isEditing">
+                    <label class="sr-only" for="monday">Monday</label>
+                    <input type="number" class="form-control" id="monday" placeholder="Mo" ng-model="project.monday">
+                </div>
+                <div class="col-xs-2" ng-if="!report.isEditing">
+                    <p class="form-control-static" ng-if="!report.isEditing">{{::project.monday}}</p>
+                </div>
+                <!--Tuesday-->
+                <div class="col-xs-2" ng-if="report.isEditing">
+                    <label class="sr-only" for="tuesday">Tuesday</label>
+                    <input type="number" class="form-control" id="tuesday" placeholder="Tu" ng-model="project.tuesday">
+                </div>
+                <div class="col-xs-2" ng-if="!report.isEditing">
+                    <p class="form-control-static">{{::project.tuesday}}</p>
+                </div>
+                <!--Wednesday-->
+                <div class="col-xs-2" ng-if="report.isEditing">
+                    <label class="sr-only" for="wednesday">Wednesday</label>
+                    <input type="number" class="form-control" id="wednesday" placeholder="We" ng-model="project.wednesday">
+                </div>
+                <div class="col-xs-2" ng-if="!report.isEditing">
+                    <p class="form-control-static">{{::project.wednesday}}</p>
+                </div>
+                <!--Thursday-->
+                <div class="col-xs-2" ng-if="report.isEditing">
+                    <label class="sr-only" for="thursday">Thursday</label>
+                    <input type="number" class="form-control" id="thursday" placeholder="Th" ng-model="project.thursday">
+                </div>
+                <div class="col-xs-2" ng-if="!report.isEditing">
+                    <p class="form-control-static">{{::project.thursday}}</p>
+                </div>
+                <!--Friday-->
+                <div class="col-xs-2" ng-if="report.isEditing">
+                    <label class="sr-only" for="friday">Friday</label>
+                    <input type="number" class="form-control" id="friday" placeholder="Fr" ng-model="project.friday">
+                </div>
+                <div class="col-xs-2" ng-if="!report.isEditing">
+                    <p class="form-control-static">{{::project.friday}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-8">
+                    <!--Filler-->
+                </div>
+                <!--Saturday-->
+                <div class="col-xs-2" ng-if="report.isEditing">
+                    <label class="sr-only" for="saturday">Saturday</label>
+                    <input type="number" class="form-control" id="saturday" placeholder="Sa" ng-model="project.saturday">
+                </div>
+                <div class="col-xs-2" ng-if="!report.isEditing">
+                    <p class="form-control-static">{{::project.saturday}}</p>
+                </div>
+                <!--Sunday-->
+                <div class="col-xs-2" ng-if="report.isEditing">
+                    <label class="sr-only" for="sunday">Sunday</label>
+                    <input type="number" class="form-control" id="sunday" placeholder="Su" ng-model="project.sunday">
+                </div>
+                <div class="col-xs-2" ng-if="!report.isEditing">
+                    <p class="form-control-static">{{::project.sunday}}</p>
+                </div>
             </div>
         </div>
     </form>

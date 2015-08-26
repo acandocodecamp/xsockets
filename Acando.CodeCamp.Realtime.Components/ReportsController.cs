@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Acando.CodeCamp.Realtime.Data;
+using XSockets.Core.Common.Configuration;
 using XSockets.Core.Common.Socket.Event.Interface;
 using XSockets.Core.XSocket;
 using XSockets.Core.XSocket.Helpers;
@@ -20,9 +21,17 @@ namespace Acando.CodeCamp.Realtime
         public async Task SaveReport(ReportModel report)
         {
             report.Approved = true;
-            await _reportStorage.UpsertAsync(report);
-            await Task.Delay(5000);
-            this.InvokeToAll(report, "approvedReport");
+            if (report.HasScaled)
+            {
+                report.HasScaled = false;
+                this.PublishToAll(report, "approvedReport");
+            }
+            else
+            {
+                await _reportStorage.UpsertAsync(report);
+                await Task.Delay(5000);
+                this.PublishToAll(report, "approvedReport");
+            }
         }
 
         public override Task OnOpened()

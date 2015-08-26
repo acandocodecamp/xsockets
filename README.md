@@ -43,4 +43,5 @@
 - Custom DI?
 - Dont use javascsript API from bower
 - V4 packages won't work in VS2015
+- Naming conventions (e.g controller methods in JS are lowercase, controller is referenced without "Controller")
 - Opinionated?

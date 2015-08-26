@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Acando.CodeCamp.Realtime
 {
-    public class ReportModel : Document
+    public class ReportModel : Document, IScaleableMessage
     {
         [JsonProperty("year")]
         public int Year { get; set; }
@@ -16,6 +16,9 @@ namespace Acando.CodeCamp.Realtime
 
         [JsonProperty("projects")]
         public Project[] Projects { get; set; }
+
+        [JsonProperty("hasScaled")]
+        public bool HasScaled { get; set; }
 
         public class Project
         {

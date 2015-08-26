@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.ServiceBus;
 using Microsoft.ServiceBus.Messaging;
@@ -9,6 +10,7 @@ using XSockets.Core.Common.Socket;
 using XSockets.Core.Common.Socket.Event.Interface;
 using XSockets.Core.Common.Utility.Logging;
 using XSockets.Core.Common.Utility.Serialization;
+using XSockets.Core.XSocket.Helpers;
 using XSockets.Core.XSocket.Model;
 using XSockets.Enterprise.Scaling;
 using XSockets.Plugin.Framework;
@@ -87,8 +89,24 @@ namespace Acando.CodeCamp.Realtime
 
         private BrokeredMessage GetBrokerMessage(IMessage message)
         {
+            //Hack to avoid duplicate handling of message
+            IMessage newMessage = message;
+            var controller = Composable.GetExports<IXSocketController>().First(p => p.Alias == message.Controller);
+            IPluginCustomEventInfo pluginCustomEventInfo = controller.CustomEvents[message.Topic];
+            ParameterInfo[] parameterInfos = pluginCustomEventInfo.MethodInfo.GetParameters();
+            object[] methodParameters = _jsonSerializer.DeserializeFromString(message.Data, parameterInfos);
+            if (methodParameters.Length == 1)
+            {
+                var scaleableMessage = methodParameters[0] as IScaleableMessage;
+                if (scaleableMessage != null)
+                {
+                    scaleableMessage.HasScaled = true;
+                    newMessage = scaleableMessage.AsMessage(message.Topic);
+                    newMessage.Controller = message.Controller;
+                }
+            }
             var brokeredMessage = new BrokeredMessage();
-            brokeredMessage.Properties[DataAttributeName] = _jsonSerializer.SerializeToString(message);
+            brokeredMessage.Properties[DataAttributeName] = _jsonSerializer.SerializeToString(newMessage);
             brokeredMessage.Properties[SidAttributeName] = _sid;
             return brokeredMessage;
         }

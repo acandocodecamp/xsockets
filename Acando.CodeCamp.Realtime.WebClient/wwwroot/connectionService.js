@@ -12,6 +12,9 @@
 
         var connection = new XSockets.WebSocket(endpoint, ['reports', 'notification']);
         connection.setAutoReconnect();
+        connection.onconnected = function () {
+            console.log('socket connected on endpoint ' + endpoint);
+        };
 
         function getPort() {
             return $location.search().port || '4502';

@@ -2,7 +2,9 @@
 using Acando.CodeCamp.Realtime;
 using Microsoft.Owin;
 using Owin;
+using XSockets.Core.Common.Configuration;
 using XSockets.Owin.Host;
+using XSockets.Plugin.Framework;
 
 [assembly: OwinStartup(typeof(Startup))]
 
@@ -12,33 +14,23 @@ namespace Acando.CodeCamp.Realtime
     {
         public void Configuration(IAppBuilder app)
         {
-            //StringBuilder sb = new StringBuilder(100);
-            //sb.AppendLine("Hi.");
-            //sb.AppendLine("");
-            //sb.AppendLine("");
-            //sb.AppendLine("Listening on endpoints:");
-            //sb.AppendLine("");
+            StringBuilder sb = new StringBuilder(100);
+            sb.AppendLine("Hi.");
+            sb.AppendLine("");
+            sb.AppendLine("Listening on endpoints:");
+            sb.AppendLine("");
 
-            app.UseXSockets();
-            //using (var container = Composable.GetExport<IXSocketServerContainer>())
-            //{
-            //    container.OnStarted += (sender, args) =>
-            //    {
+            app.UseXSockets(new OwinHostConfiguration());
 
-            //    };
-            //    container.Start();
+            var configurationSetting = Composable.GetExport<IConfigurationSetting>();
 
-            //    foreach (var server in container.Servers)
-            //    {
-            //        sb.AppendLine(server.ConfigurationSetting.Endpoint.ToString());
-            //    }
-            //}
+            sb.AppendLine(configurationSetting.Uri.ToString());
 
-            //app.Run(context =>
-            //{
-            //    context.Response.ContentType = "text/plain";
-            //    return context.Response.WriteAsync(sb.ToString());
-            //});
+            app.Run(context =>
+            {
+                context.Response.ContentType = "text/plain";
+                return context.Response.WriteAsync(sb.ToString());
+            });
         }
     }
 }
